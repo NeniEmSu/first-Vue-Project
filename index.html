@@ -20,33 +20,39 @@
 
     <div id="app">
         <div class="product">
+
             <div class="product-image">
                 <img v-bind:src="image" :alt="description">
             </div>
+
             <div class="product-info">
-                <h1>{{ product }}</h1>
+                <div class="cart">
+                    <p>Cart({{cart}})</p>
+                </div>
+                <h1>{{ title }}</h1>
                 <p>{{ description }}</p>
-                <span v-if="onSale">On Sale!</span>
-                <p v-show="inStock">In Stock </p>
-                <p v-if="inventory >= 10">In stock</p>
-                <p v-else-if="inventory <= 10 && inventory > 0">Almost Done!</p>
+                <p v-if="inStock">In Stock </p>
                 <p v-else>Out of Stock</p>
+                <p>{{ sale }}</p>
                 <ul>
                     <li v-for="item in items">{{ item }}</li>
                 </ul>
 
-                <div v-for="variant in variants" :key="variant.variantId">
-                    <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p>
+                <div v-for="(variant, index) in variants" :key="variant.variantId" class="color-box"
+                    :style="{ backgroundColor: variant.variantColor }" @mouseover="updateProduct(index)">
                 </div>
                 <ol>
                     <li v-for="size in sizes">{{ size }}</li>
                 </ol>
 
-                <button v-on:click="addToCart">Add to Cart</button>
-                <button v-on:click="decrimentFromCart" v-show="cart > 0">Dectrment From cart</button>
-                <div class="cart">
-                    <p>Cart({{cart}})</p>
+
+                <div><button v-on:click="addToCart" :disabled="!inStock" :class="{disabledButton: !inStock}">Add to
+                        Cart</button>
                 </div>
+                <div><button v-on:click="decrimentFromCart" v-show="cart > 0">Dectrment From cart</button></div>
+
+
+
             </div>
         </div>
     </div>
