@@ -10,6 +10,18 @@ body {
     margin-bottom: 15px;
 }
 
+a {
+    color: #282828;
+    text-decoration: none;
+    line-height: 60px;
+    margin: 0 20px;
+}
+
+
+a:hover {
+    color: #d8d8d8;
+}
+
 .product {
     display: flex;
     flex-flow: wrap;
