@@ -1,3 +1,31 @@
+Vue.component('product-details', {
+    props: {
+        details: {
+            type: Array,
+            required: true
+        }
+    },
+    template: `
+      <ul>
+        <li v-for="detail in details">{{ detail }}</li>
+      </ul>
+    `
+})
+
+Vue.component('product-sizes', {
+    props: {
+        details: {
+            type: Array,
+            required: true
+        }
+    },
+    template: `
+    <ol>
+        <li v-for="size in sizes">{{ size }}</li>
+    </ol>
+    `
+})
+
 Vue.component('product', {
     props: {
         premium: {
@@ -23,8 +51,6 @@ Vue.component('product', {
             <p>{{ sale }}</p>
             <p>Shipping: {{ shipping }}</p>
   
-            <product-details :details="details"></product-details>
-  
             <div class="color-box"
                  v-for="(variant, index) in variants" 
                  :key="variant.variantId"
@@ -33,12 +59,9 @@ Vue.component('product', {
                  >
             </div> 
 
-                <ul>
-                    <li v-for="detail in details">{{ detail }}</li>
-                </ul>
-                <ol>
-                    <li v-for="size in sizes">{{ size }}</li>
-                </ol>
+            <product-details :details="details"></product-details>
+            <product-sizes :sizes="sizes"></product-sizes>
+            
   
             <div><button v-on:click="addToCart" :disabled="!inStock" :class="{disabledButton: !inStock}">Add to
                         Cart</button>
