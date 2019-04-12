@@ -22,11 +22,13 @@ var app = new Vue({
         ],
         variants: [{
                 variantId: 2234,
-                variantColor: "green"
+                variantColor: "green",
+                variantImage: "./img/vmSocks-green-onWhite.jpg"
             },
             {
                 variantId: 2235,
-                variantColor: "blue"
+                variantColor: "blue",
+                variantImage: "./img/vmSocks-blue-onWhite.jpg"
             }
 
         ],
@@ -40,8 +42,18 @@ var app = new Vue({
         cart: 0
     },
     methods: {
+        // using normal javascript es5 function
         addToCart: function () {
             this.cart += 1
+        },
+        // using es6 functiion decletation
+
+        decrimentFromCart: function () {
+            this.cart -= 1
+        },
+        updateProduct(variantImage) {
+            this.image = variantImage
         }
+
     }
 })
