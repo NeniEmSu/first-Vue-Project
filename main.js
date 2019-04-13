@@ -14,9 +14,10 @@ Vue.component('product-details', {
 
 Vue.component('product-sizes', {
     props: {
-        details: {
+        sizes: {
             type: Array,
-            required: true
+            required: true,
+            default: ["Medium"]
         }
     },
     template: `
