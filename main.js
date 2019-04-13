@@ -42,15 +42,13 @@ Vue.component('product', {
         </div>
   
         <div class="product-info">
-        <div class="cart">
-              <p>Cart({{ cart }})</p>
-            </div>
+        
             <h1>{{ product }}</h1>
             <p>{{ description }}</p>
             <p v-if="inStock">In Stock</p>
             <p v-else>Out of Stock</p>
             <p>{{ sale }}</p>
-            <p>Shipping: {{ shipping }}</p>
+            <p>Shipping: $ {{ shipping }}</p>
   
             <div class="color-box"
                  v-for="(variant, index) in variants" 
@@ -67,7 +65,7 @@ Vue.component('product', {
             <div><button v-on:click="addToCart" :disabled="!inStock" :class="{disabledButton: !inStock}">Add to
                         Cart</button>
                 </div>
-                <div><button v-on:click="decrimentFromCart" v-show="cart > 0">Dectrment From cart</button></div>
+                <div><button v-on:click="decrimentFromCart">Dectrment From cart</button></div>
   
          </div>  
       
@@ -99,16 +97,15 @@ Vue.component('product', {
                 "Medium",
                 "Small",
                 "Tiny"
-            ],
-            cart: 0
+            ]
         }
     },
     methods: {
         addToCart: function () {
-            this.cart += 1
+            this.$emit("add-to-cart")
         },
         decrimentFromCart: function () {
-            this.cart -= 1
+            this.$emit("decriment-from-cart")
         },
         updateProduct: function (index) {
             this.selectedVariant = index
@@ -154,6 +151,15 @@ var navigation = new Vue({
 var app = new Vue({
     el: '#app',
     data: {
-        premium: true
+        premium: false,
+        cart: 0
+    },
+    methods: {
+        updateCart() {
+            this.cart += 1
+        },
+        decreseCart() {
+            this.cart -= 1
+        }
     }
 })
